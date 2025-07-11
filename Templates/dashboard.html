@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <h2><i class="fas fa-home"></i> Welcome, {{ current_user.username }}!</h2>
+    <div class="card">
+        <h3>Financial Overview</h3>
+        <p><strong>Total Income:</strong> ${{ "%.2f" | format(total_income) }}</p>
+        <p><strong>Total Expenses:</strong> ${{ "%.2f" | format(total_expenses) }}</p>
+        <p><strong>Current Balance:</strong> ${{ "%.2f" | format(current_balance) }}</p>
+    </div>
+    <div class="card">
+        <h3>Spending Breakdown</h3>
+        {% if spending %}
+            <img src="{{ url_for('static', filename='spending_chart.png') }}" alt="Spending Chart" style="max-width: 100%;">
+            <ul>
+                {% for category, amount in spending.items() %}
+                    <li>{{ category }}: ${{ "%.2f" | format(amount) }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No spending data available yet.</p>
+        {% endif %}
+    </div>
+    <div class="card">
+        <h3>Recent Activity</h3>
+        {% if recent_transactions %}
+            <ul>
+                {% for trans in recent_transactions %}
+                    <li>{{ trans[3] }} - {{ trans[0] }}: {{ trans[1] }} - ${{ "%.2f" | format(trans[2]) }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No recent activity.</p>
+        {% endif %}
+    </div>
+    <div class="card">
+        <p>Manage your finances with SmartFinance. Use the navigation to view transactions, set budgets, goals, or reminders.</p>
+        {% if is_admin %}
+            <p><a href="{{ url_for('admin_dashboard') }}" class="glow-button"><i class="fas fa-user-shield"></i> Go to Admin Dashboard</a></p>
+        {% endif %}
+    </div>
+    <div class="nav-links">
+        <a href="{{ url_for('transactions') }}" class="hover-link">Transactions</a>
+        <a href="{{ url_for('budgets') }}" class="hover-link">Budgets</a>
+        <a href="{{ url_for('goals') }}" class="hover-link">Goals</a>
+        <a href="{{ url_for('reminders') }}" class="hover-link">Reminders</a>
+        <a href="{{ url_for('profile') }}" class="hover-link">Profile</a>
+        <a href="{{ url_for('reports') }}" class="hover-link">Reports</a>
+        <a href="{{ url_for('chat') }}" class="hover-link">Chat</a>
+        {% if is_admin %}
+            <a href="{{ url_for('admin_dashboard') }}" class="hover-link">Admin</a>
+        {% endif %}
+        <a href="{{ url_for('logout') }}" class="hover-link">Logout</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}SmartFinance{% endblock %}
+{% block content %}
+    <h1 class="header-bounce"><i class="fas fa-piggy-bank"></i> Welcome to SmartFinance</h1>
+    <div class="card">
+        <p>Manage your finances with ease. Log in or register to start tracking your transactions, budgets, and goals.</p>
+        <p>
+            <a href="{{ url_for('login') }}" class="glow-button"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="{{ url_for('register') }}" class="glow-button"><i class="fas fa-user-plus"></i> Register</a>
+        </p>
+        <p>Or sign in with:</p>
+        <p>
+            <a href="#" class="social-button facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+            <a href="#" class="social-button twitter"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="#" class="social-button google"><i class="fab fa-google"></i> Google</a>
+        </p>
+    </div>
+{% endblock %}

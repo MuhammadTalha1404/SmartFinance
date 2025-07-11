@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+    <h2><i class="fas fa-user"></i> Profile</h2>
+    <div class="card">
+        <h3>Your Profile</h3>
+        {% if profile_picture %}
+            <img src="{{ url_for('static', filename='uploads/' + profile_picture) }}" alt="Profile Picture" style="max-width: 200px; border-radius: 50%;">
+        {% else %}
+            <p>No profile picture uploaded.</p>
+        {% endif %}
+        <p><strong>Username:</strong> {{ username }}</p>
+        <p><strong>Age:</strong> {{ age if age else 'Not set' }}</p>
+        <p><strong>Occupation:</strong> {{ occupation if occupation else 'Not set' }}</p>
+        <p><strong>Income ($):</strong> {{ "%.2f" | format(income) if income else 'Not set' }}</p>
+        <p><strong>Location:</strong> {{ location if location else 'Not set' }}</p>
+        <p><strong>Financial Goals Summary:</strong> {{ financial_goals_summary if financial_goals_summary else 'Not set' }}</p>
+    </div>
+    <div class="card">
+        <h3>Update Profile</h3>
+        <form method="POST" action="{{ url_for('update_profile') }}" enctype="multipart/form-data" class="form-slide">
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" value="{{ age if age else '' }}" min="0" max="120" placeholder="Enter your age">
+            </div>
+            <div class="form-group">
+                <label for="occupation">Occupation</label>
+                <input type="text" id="occupation" name="occupation" value="{{ occupation if occupation else '' }}" placeholder="Enter your occupation">
+            </div>
+            <div class="form-group">
+                <label for="income">Monthly Income ($)</label>
+                <input type="number" id="income" name="income" step="0.01" value="{{ income if income else '' }}" placeholder="Enter your income">
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" value="{{ location if location else '' }}" placeholder="Enter your location">
+            </div>
+            <div class="form-group">
+                <label for="financial_goals_summary">Financial Goals Summary</label>
+                <textarea id="financial_goals_summary" name="financial_goals_summary" placeholder="Summarize your financial goals">{{ financial_goals_summary if financial_goals_summary else '' }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="profile_picture">Profile Picture</label>
+                <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+            </div>
+            <button type="submit" class="glow-button"><i class="fas fa-save"></i> Update Profile</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <a href="{{ url_for('dashboard') }}" class="hover-link">Back to Dashboard</a>
+{% endblock %}

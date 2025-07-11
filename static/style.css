@@ -1,0 +1,417 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f7e7ce; /* Champagne Beige */
+    color: #ffffff; /* White */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.3) 0%, transparent 50%); /* Royal Gold radial */
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    width: 100%;
+    background: rgba(217, 194, 169, 0.95); /* Soft Taupe with glassy effect */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 0 15px rgba(212, 175, 55, 0.2); /* Royal Gold glow */
+    animation: fadeIn 1s ease-in-out;
+}
+
+h1, h2, h3 {
+    color: #ffffff; /* White */
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Improved readability */
+}
+
+h1 {
+    font-size: 2.5em;
+    animation: slideDown 1s ease-out;
+}
+
+.auth-card {
+    background: rgba(217, 194, 169, 0.95); /* Soft Taupe with glassy effect */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1), 0 0 15px rgba(15, 82, 186, 0.2); /* Sapphire Blue glow */
+    text-align: center;
+    max-width: 450px;
+    margin: auto;
+    animation: fadeIn 1.5s ease-out;
+    border: 1px solid #d4af37; /* Royal Gold */
+}
+
+.header-bounce {
+    color: #ffffff; /* White */
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Improved readability */
+    animation: bounce 2s infinite;
+}
+
+.header-bounce i {
+    margin-right: 15px;
+    color: rgba(255, 255, 255, 0.5); /* Semi-transparent White for icons */
+    animation: spin 4s linear infinite;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    background: linear-gradient(45deg, #0f52ba, #d4af37); /* Sapphire Blue to Royal Gold */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+nav ul li a {
+    color: #ffffff; /* White */
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Improved readability */
+}
+
+nav ul li a:hover {
+    color: #f7e7ce; /* Champagne Beige */
+    text-decoration: underline;
+}
+
+/* Form and Input Styles */
+.form-slide {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    margin-bottom: 0;
+    text-align: left;
+    position: relative;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: #ffffff; /* White */
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+}
+
+input, select {
+    padding: 15px;
+    width: 100%;
+    border: 1px solid #d9c2a9; /* Soft Taupe */
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    background: rgba(217, 194, 169, 0.8); /* Soft Taupe with transparency */
+    color: #ffffff; /* White */
+    transition: all 0.4s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5); /* Semi-transparent White */
+}
+
+input:focus, select:focus {
+    border-color: #0f52ba; /* Sapphire Blue */
+    box-shadow: 0 0 10px rgba(15, 82, 186, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sapphire Blue glow */
+    outline: none;
+    transform: scale(1.02);
+}
+
+button, .glow-button {
+    background: linear-gradient(45deg, #0f52ba, #d4af37); /* Sapphire Blue to Royal Gold */
+    color: #ffffff; /* White */
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    box-shadow: 0 4px 15px rgba(15, 82, 186, 0.5), 0 0 10px rgba(212, 175, 55, 0.3); /* Sapphire Blue and Gold glow */
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Improved readability */
+}
+
+.glow-button.small {
+    padding: 8px 12px;
+    font-size: 0.9em;
+}
+
+button:hover, .glow-button:hover {
+    background: linear-gradient(45deg, #d4af37, #0f52ba); /* Reverse gradient */
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.7), 0 0 20px rgba(15, 82, 186, 0.5);
+}
+
+.glow-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2); /* White glow */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.glow-button:hover::after {
+    width: 200%;
+    height: 200%;
+}
+
+/* Social Media Buttons */
+.social-button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    color: #ffffff; /* White */
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Improved readability */
+}
+
+.social-button.facebook {
+    background: #3b5998; /* Facebook Blue */
+}
+
+.social-button.twitter {
+    background: #00acee; /* Twitter Blue */
+}
+
+.social-button.google {
+    background: #db4437; /* Google Red */
+}
+
+.social-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Flash Messages */
+.flash {
+    color: #800020; /* Burgundy */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    padding: 10px;
+    background: rgba(128, 0, 32, 0.1); /* Burgundy with transparency */
+    border-radius: 8px;
+    animation: pulse 1.5s infinite;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Improved readability */
+}
+
+/* Success Messages */
+.success {
+    color: #50c878; /* Emerald Green */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    padding: 10px;
+    background: rgba(80, 200, 120, 0.1); /* Emerald Green with transparency */
+    border-radius: 8px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Improved readability */
+}
+
+/* Card Layout */
+.card {
+    background: rgba(217, 194, 169, 0.95); /* Soft Taupe with glassy effect */
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 10px rgba(212, 175, 55, 0.2); /* Royal Gold glow */
+    animation: fadeInUp 1s ease-out;
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #ffffff; /* White */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Improved readability */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    background: rgba(217, 194, 169, 0.95); /* Soft Taupe */
+    border-radius: 5px;
+    border: 1px solid #d9c2a9; /* Soft Taupe */
+    color: #ffffff; /* White */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Improved readability */
+}
+
+th {
+    background: #d4af37; /* Royal Gold */
+    color: #f7e7ce; /* Champagne Beige for contrast */
+    font-weight: 700;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 10px rgba(15, 82, 186, 0.2); /* Sapphire Blue glow */
+    animation: bounceIn 1s ease-out;
+}
+
+/* Links */
+.link-text {
+    color: #d4af37; /* Royal Gold */
+    margin-top: 20px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Improved readability */
+}
+
+.hover-link {
+    color: #0f52ba; /* Sapphire Blue */
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.hover-link:hover {
+    color: #d4af37; /* Royal Gold */
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 1px 2px rgba(0, 0, 0, 0.2); /* Royal Gold glow with readability */
+    text-decoration: underline;
+}
+
+/* Register-Specific Styles */
+.strength-bar {
+    height: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Chatbot Styles */
+#chat-container {
+    margin-top: 20px;
+}
+
+#chat-messages {
+    height: 400px;
+    overflow-y: auto;
+    background: rgba(217, 194, 169, 0.95); /* Soft Taupe */
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d9c2a9; /* Soft Taupe */
+}
+
+#chat-messages div {
+    margin: 10px 0;
+    line-height: 1.5;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2); /* White with transparency */
+    color: #ffffff; /* White */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Improved readability */
+}
+
+#chat-messages strong {
+    color: #d4af37; /* Royal Gold */
+}
+
+#chat-input {
+    width: 70%;
+    margin-right: 10px;
+    padding: 10px;
+    background: rgba(217, 194, 169, 0.95); /* Soft Taupe */
+    border: 1px solid #d9c2a9; /* Soft Taupe */
+    border-radius: 8px;
+    color: #ffffff; /* White */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Improved readability */
+}
+
+#chat-input::placeholder {
+    color: rgba(255, 255, 255, 0.5); /* Semi-transparent White */
+}
+
+#chat-container button {
+    width: 25%;
+    padding: 10px;
+    background: linear-gradient(45deg, #0f52ba, #d4af37); /* Sapphire Blue to Royal Gold */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #ffffff; /* White */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Improved readability */
+}
+
+#chat-container button:hover {
+    background: linear-gradient(45deg, #d4af37, #0f52ba); /* Reverse gradient */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container { padding: 15px; }
+    .auth-card { padding: 25px; }
+    h1 { font-size: 2em; }
+    input, select, button { font-size: 14px; padding: 10px; }
+    table { font-size: 0.9em; }
+    nav ul { flex-direction: column; text-align: center; }
+    nav ul li { margin: 5px 0; }
+    #chat-input, #chat-container button { width: 100%; margin-bottom: 10px; }
+    .glow-button.small { font-size: 0.8em; padding: 6px 10px; }
+}

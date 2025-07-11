@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+   {% block title %}Goals{% endblock %}
+   {% block content %}
+       <h2><i class="fas fa-bullseye"></i> Savings Goals</h2>
+       <div class="card">
+           <h3>Set New Goal</h3>
+           <form method="POST" action="{{ url_for('set_goal') }}" class="form-slide">
+               <div class="form-group">
+                   <label for="description">Description</label>
+                   <input type="text" id="description" name="description" required placeholder="e.g., Buy a Car">
+               </div>
+               <div class="form-group">
+                   <label for="target_amount">Target Amount ($)</label>
+                   <input type="number" id="target_amount" name="target_amount" step="0.01" required placeholder="e.g., 5000.00">
+               </div>
+               <div class="form-group">
+                   <label for="deadline">Deadline</label>
+                   <input type="date" id="deadline" name="deadline" required>
+               </div>
+               <button type="submit" class="glow-button"><i class="fas fa-save"></i> Set Goal</button>
+           </form>
+       </div>
+       <div class="card">
+           <h3>Current Goals</h3>
+           {% if goals %}
+               <table>
+                   <tr><th>Description</th><th>Target Amount</th><th>Current Amount</th><th>Deadline</th></tr>
+                   {% for g in goals %}
+                       <tr>
+                           <td>{{ g[0] }}</td>
+                           <td>${{ "%.2f" % g[1] }}</td>
+                           <td>${{ "%.2f" % g[2] }}</td>
+                           <td>{{ g[3] }}</td>
+                       </tr>
+                   {% endfor %}
+               </table>
+           {% else %}
+               <p>No goals set yet.</p>
+           {% endif %}
+       </div>
+   {% endblock %}

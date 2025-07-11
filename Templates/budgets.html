@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Budgets{% endblock %}
+{% block content %}
+    <h2 class="header-bounce"><i class="fas fa-wallet"></i> Your Budgets</h2>
+    <div class="card">
+        <h3>Set New Budget</h3>
+        <form method="POST" action="{{ url_for('set_budget') }}" class="form-slide">
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" id="category" name="category" required placeholder="e.g., Food, Transport">
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount ($)</label>
+                <input type="number" id="amount" name="amount" step="0.01" required placeholder="e.g., 500.00">
+            </div>
+            <button type="submit" class="glow-button"><i class="fas fa-save"></i> Set Budget</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="card">
+        <h3>Current Budgets</h3>
+        {% if budgets %}
+            <table>
+                <tr><th>Category</th><th>Amount</th><th>Action</th></tr>
+                {% for b in budgets %}
+                    <tr>
+                        <td>{{ b[1] }}</td>  <!-- category (index 1 due to id being 0) -->
+                        <td>${{ "%.2f" | format(b[2]) }}</td>  <!-- amount (index 2) -->
+                        <td><a href="{{ url_for('user_edit_budget', budget_id=b[0]) }}" class="hover-link">Edit</a></td>  <!-- id (index 0) -->
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No budgets set yet.</p>
+        {% endif %}
+        <a href="{{ url_for('dashboard') }}" class="hover-link">Back to Dashboard</a>
+    </div>
+{% endblock %}

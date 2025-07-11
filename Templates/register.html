@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - SmartFinance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-card">
+            <h2 class="header-bounce"><i class="fas fa-user-plus"></i> Join SmartFinance</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash">{{ messages[0] }}</div>
+                {% endif %}
+            {% endwith %}
+            <form method="POST" action="{{ url_for('register') }}" onsubmit="return validatePassword()" class="form-slide">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Choose a unique username">
+                </div>
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required placeholder="Enter your first name">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" required placeholder="Enter your last name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password" onkeyup="checkPasswordStrength()">
+                    <div id="password-strength" class="strength-bar"></div>
+                    <small id="password-error" style="color: #FF4444; display: none;">Password must be at least 8 characters with uppercase, lowercase, numbers, and special characters.</small>
+                </div>
+                <button type="submit" class="glow-button"><i class="fas fa-user-plus"></i> Sign Up Now</button>
+            </form>
+            <p class="link-text">Already have an account? <a href="{{ url_for('login') }}" class="hover-link">Login</a></p>
+        </div>
+    </div>
+    <script>
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const error = document.getElementById('password-error');
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumbers = /\d/.test(password);
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const isLengthValid = password.length >= 8;
+
+            if (!(hasUpperCase && hasLowerCase && hasNumbers && hasSpecial && isLengthValid)) {
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthBar = document.getElementById('password-strength');
+            let strength = 0;
+
+            if (password.length >= 8) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[a-z]/.test(password)) strength += 25;
+            if (/\d/.test(password)) strength += 25;
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength += 25;
+
+            strength = Math.min(strength, 100);
+            strengthBar.style.width = `${strength}%`;
+            strengthBar.style.background = strength < 50 ? '#FF4444' : strength < 75 ? '#FFCE56' : '#4BC0C0';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}SmartFinance Assistant{% endblock %}
+{% block content %}
+    <h2 class="header-bounce"><i class="fas fa-comment"></i> SmartFinance Assistant</h2>
+    <div class="card" id="chat-container">
+        <div id="chat-messages"></div>
+        <div id="typing-indicator" style="display: none; color: #FFD700; padding: 10px;">Assistant is typing...</div>
+        <div class="form-group">
+            <input type="text" id="chat-input" placeholder="Ask about finances, tasks, or anything else..." autocomplete="off">
+            <button onclick="sendMessage()" class="glow-button"><i class="fas fa-paper-plane"></i> Send</button>
+        </div>
+        <div class="card" style="margin-top: 10px;">
+            <h3>Suggested Questions</h3>
+            <button class="glow-button small" onclick="setInput('How much did I spend this month?')">Spending This Month</button>
+            <button class="glow-button small" onclick="setInput('What are my budgets?')">My Budgets</button>
+            <button class="glow-button small" onclick="setInput('Tell me a joke')">Tell a Joke</button>
+            <button class="glow-button small" onclick="setInput('Set a reminder to pay bills tomorrow')">Set Reminder</button>
+            <button class="glow-button small" onclick="setInput('Give me a motivational quote')">Motivational Quote</button>
+            <button class="glow-button small" onclick="setInput('How can I save more money?')">Savings Tips</button>
+        </div>
+    </div>
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const messages = document.getElementById('chat-messages');
+            const typing = document.getElementById('typing-indicator');
+            const query = input.value.trim();
+            if (!query) return;
+            messages.innerHTML += `<div><strong>You:</strong> ${query}</div>`;
+            input.value = '';
+            typing.style.display = 'block';
+            messages.scrollTop = messages.scrollHeight;
+            try {
+                const response = await fetch('/chat_process', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query })
+                });
+                const data = await response.json();
+                typing.style.display = 'none';
+                messages.innerHTML += `<div><strong>Assistant:</strong> ${data.response}</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            } catch (error) {
+                typing.style.display = 'none';
+                messages.innerHTML += `<div><strong>Error:</strong> Could not connect to server.</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+
+        function setInput(text) {
+            document.getElementById('chat-input').value = text;
+            sendMessage();
+        }
+
+        document.getElementById('chat-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+{% endblock %}
